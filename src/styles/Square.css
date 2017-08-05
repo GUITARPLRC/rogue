@@ -1,0 +1,10 @@
+
+.square {
+	background-color:#95a5a6;
+	border: 1px solid #000;
+	height: 100px;
+	width: 100px;
+}
+.blackout {
+	background-color:#2c3e50;
+}

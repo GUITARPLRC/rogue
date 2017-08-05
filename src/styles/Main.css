@@ -1,0 +1,12 @@
+.main {
+	background-color:#ecf0f1;
+}
+h1 {
+	font-size:38px;
+	margin: 0;
+	padding:2%;
+	text-align: center;
+}
+.game {
+	display: flex;
+}
