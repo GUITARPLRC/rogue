@@ -27,7 +27,9 @@ class Square extends Component {
 		}
 		return (
 			<div className={name} coords={coords}>
-
+				{if (name.contains('player')) {
+					return <div className='warrior'></div>
+				}}
 			</div>
 		)
 	}
