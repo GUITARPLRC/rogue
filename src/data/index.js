@@ -48,7 +48,30 @@ export const enemy = [
 export let board = [];
 for (let i = 0; i < 40; i++) {
 	for (let j = 0; j < 9; j++) {
-		board.push({ coords: {x:i, y:j}, showing:false })
+
+		let number = Math.random();
+		let weapon = 0;
+		let enemy = 0;
+		if (number > 0.95) {
+			board.push({ coords: {x:i, y:j}, showing:false, health:true })
+		} else if (number > 0.85) {
+			if (weapon < 3) {
+				board.push({ coords: {x:i, y:j}, showing:false, weapon })
+				weapon++;
+			} else {
+				board.push({ coords: {x:i, y:j}, showing:false })
+			}
+		} else if (number > 0.8) {
+			if (enemy < 5) {
+				board.push({ coords: {x:i, y:j}, showing:false, enemy })
+				enemy++;
+			} else {
+				board.push({ coords: {x:i, y:j}, showing:false })
+			}
+		} else {
+			board.push({ coords: {x:i, y:j}, showing:false })
+		}
+
 	}
 }
 
