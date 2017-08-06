@@ -3,3 +3,10 @@ export const battle = () => {
 		type: 'BATTLE'
 	}
 };
+
+export const move = (value) => {
+	return {
+		type: 'MOVE',
+		value
+	}
+};

@@ -4,7 +4,7 @@ export const player = {
 	damage: 2,
 	experience: 0,
 	level: 0,
-	coords: {x:1, y:4}
+	coords: {x:0, y:4}
 }
 
 export const enemy = [

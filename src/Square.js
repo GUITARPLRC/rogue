@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './styles/Square.css';
 
 class Square extends Component {
+
 	render() {
 		const { coords, className, player } = this.props;
 		let name = className;
@@ -26,7 +27,7 @@ class Square extends Component {
 			name = 'square'
 		}
 		return (
-			<div className={name} coords={coords}>
+			<div className={name} coords={coords} onKeyPress={this.movePlayer}>
 				{name.includes('player') ? <div className='warrior'></div> : ''}
 			</div>
 		)
