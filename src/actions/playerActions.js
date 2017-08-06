@@ -10,3 +10,9 @@ export const move = (value) => {
 		value
 	}
 };
+
+export const getHealth = () => {
+	return {
+		type: 'GET_HEALTH'
+	}
+};

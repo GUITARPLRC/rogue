@@ -40,7 +40,7 @@ div.square:not(.blackout) > div.health {
 	width:25px;
 }
 
-.weapon {
+div.square:not(.blackout) > div.weapon {
 	background-color: #ecf0f1;
 	border:1px solid #000;
 	height:25px;

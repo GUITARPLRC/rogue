@@ -5,6 +5,8 @@ export default (state = [], action) => {
 			return newState;
 		case 'MOVE':
 			return changePosition(action.value, newState);
+		case 'GET_HEALTH':
+			return newState.health + 25;
 		default:
 			return newState;
 	}

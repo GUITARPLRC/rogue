@@ -32,7 +32,7 @@ class Main extends Component {
 				<h1>The Dungeon of Doom</h1>
 				<div className='game'>
 					<Stats player={player} />
-					<Board enemy={enemy} player={player} health={health} weapons={weapons} />
+					<Board enemy={enemy} player={player} weapons={weapons} getHealth={this.props.getHealth} />
 				</div>
 			</div>
 		)
