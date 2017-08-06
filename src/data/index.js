@@ -52,18 +52,25 @@ for (let i = 0; i < 40; i++) {
 		let number = Math.random();
 		let weapon = 0;
 		let enemy = 0;
-		if (number > 0.95) {
-			board.push({ coords: {x:i, y:j}, showing:false, health:true })
-		} else if (number > 0.85) {
+		let health = 0
+
+		if (number > 0.9) {
+			if (health < 3) {
+				board.push({ coords: {x:i, y:j}, showing:false, health:true })
+			} else {
+				board.push({ coords: {x:i, y:j}, showing:false })
+			}
+			health++
+		} else if (number > 0.8){
 			if (weapon < 3) {
-				board.push({ coords: {x:i, y:j}, showing:false, weapon })
+				board.push({ coords: {x:i, y:j}, showing:false, weapon:weapon })
 				weapon++;
 			} else {
 				board.push({ coords: {x:i, y:j}, showing:false })
 			}
-		} else if (number > 0.8) {
+		} else if (number > 0.7) {
 			if (enemy < 5) {
-				board.push({ coords: {x:i, y:j}, showing:false, enemy })
+				board.push({ coords: {x:i, y:j}, showing:false, enemy:enemy })
 				enemy++;
 			} else {
 				board.push({ coords: {x:i, y:j}, showing:false })

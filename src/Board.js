@@ -14,7 +14,7 @@ class Board extends Component {
 					if (each.enemy) {
 						return <Square key={i} coords={each.coords} player={this.props.player} className={each.showing ? 'square' : 'square blackout'} enemy={each.enemy} />
 					} else if (each.weapon) {
-						return <Square key={i} coords={each.coords} player={this.props.player} className={each.showing ? 'square' : 'square blackout'} />
+						return <Square key={i} coords={each.coords} player={this.props.player} className={each.showing ? 'square' : 'square blackout'} weapon={each.weapon} />
 					} else if (each.health) {
 						return <Square key={i} coords={each.coords} player={this.props.player} className={each.showing ? 'square' : 'square blackout'} health={each.health}/>
 					} else {
