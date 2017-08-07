@@ -36,7 +36,7 @@ class Square extends Component {
 		} else if ( coords.x === player.coords.x + 1 && coords.y === player.coords.y + 1) {
 			name = 'square'
 		}
-		console.log(this.props.weapon)
+		
 		return (
 			<div className={name} coords={coords}>
 				{name.includes('player') ? <div className='warrior'></div> : null}

@@ -26,13 +26,13 @@ class Main extends Component {
 	}
 
 	render() {
-		const { player, enemy, weapons } = this.props;
+		const { board, player, enemy, weapons } = this.props;
 		return (
 			<div className='main'>
 				<h1>The Dungeon of Doom</h1>
 				<div className='game'>
 					<Stats player={player} />
-					<Board enemy={enemy} player={player} weapons={weapons} getHealth={this.props.getHealth} />
+					<Board board={board} enemy={enemy} player={player} weapons={weapons} getHealth={this.props.getHealth} />
 				</div>
 			</div>
 		)
@@ -42,7 +42,8 @@ class Main extends Component {
 const mapStateToProps = (state) => {
 	return {
 		player: state.player,
-		enemy: state.enemy
+		enemy: state.enemy,
+		board: state.board
 	}
 }
 
