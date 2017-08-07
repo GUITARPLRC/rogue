@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import * as playerActions from './actions/playerActions';
 
 import './styles/Main.css'
@@ -12,12 +13,16 @@ class Main extends Component {
 	handleKeyPress = (event) => {
 		if (event.keyCode === 40) {
 			this.props.move('down')
+			this.props.checkObjects(this.props.board)
 		} else if (event.keyCode === 39) {
 			this.props.move('right')
+			this.props.checkObjects(this.props.board)
 		} else if (event.keyCode === 38) {
 			this.props.move('up')
+			this.props.checkObjects(this.props.board)
 		} else if (event.keyCode === 37) {
 			this.props.move('left')
+			this.props.checkObjects(this.props.board)
 		}
 	};
 

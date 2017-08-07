@@ -1,3 +1,7 @@
+// Player State
+
+import { weapons } from '../data/index';
+
 export default (state = [], action) => {
 	let newState = JSON.parse(JSON.stringify(state));
 	switch(action.type) {
@@ -5,8 +9,8 @@ export default (state = [], action) => {
 			return newState;
 		case 'MOVE':
 			return changePosition(action.value, newState);
-		case 'GET_HEALTH':
-			return newState.health + 25;
+		case 'CHECK_OBJECTS':
+			return checkForObject(action.board, newState);
 		default:
 			return newState;
 	}
@@ -41,4 +45,20 @@ function changePosition(movement, state) {
 		return state;
 	}
 	return state;
+}
+
+function checkForObject(board, state) {
+	for (let i = 0, length = board.length; i < length; i++) {
+
+		if (board[i].coords.x === state.coords.x && board[i].coords.y === state.coords.y) {
+			if (board[i].health) {
+				state.life += 25;
+				board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
+			} else if (board[i].weaponNumber) {
+				state.weapon = weapons[board[i].weaponNumber];
+			}
+		}
+
+	}
+	return state
 }

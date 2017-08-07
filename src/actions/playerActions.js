@@ -11,8 +11,9 @@ export const move = (value) => {
 	}
 };
 
-export const getHealth = () => {
+export const checkObjects = (board) => {
 	return {
-		type: 'GET_HEALTH'
+		type: 'CHECK_OBJECTS',
+		board
 	}
 };
