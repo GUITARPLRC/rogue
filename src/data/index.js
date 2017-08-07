@@ -1,7 +1,9 @@
 export const player = {
 	life: 100,
-	weapon: 'Stick',
-	damage: 2,
+	weapon: {
+		name: 'Stick',
+		damage: 2
+	},
 	experience: 0,
 	level: 0,
 	coords: {x:0, y:4}

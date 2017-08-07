@@ -10,7 +10,7 @@ class Stats extends Component {
 				<p>Level {this.props.player.level}</p>
 				<p>Exp {this.props.player.experience}</p>
 				<p>Health {this.props.player.life}</p>
-				<p>Weapon : {this.props.player.weapon}</p>
+				<p>Weapon : {this.props.player.weapon.name}</p>
 			</div>
 		)
 	}

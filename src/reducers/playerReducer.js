@@ -54,8 +54,13 @@ function checkForObject(board, state) {
 			if (board[i].health) {
 				state.life += 25;
 				board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
+				break;
 			} else if (board[i].weaponNumber) {
-				state.weapon = weapons[board[i].weaponNumber];
+				if (state.weapon.damage < weapons[board[i].weaponNumber].damage) {
+					state.weapon = weapons[board[i].weaponNumber];
+				}
+				board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
+				break;
 			}
 		}
 
