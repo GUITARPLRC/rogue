@@ -46,32 +46,37 @@ export const enemy = [
 ]
 
 export let board = [];
+
+let weaponNumber = 0;
+let enemyNumber = 0;
+let health = 0
+
 for (let i = 0; i < 40; i++) {
 	for (let j = 0; j < 9; j++) {
 
 		let number = Math.random();
-		let weapon = 0;
-		let enemy = 0;
-		let health = 0
-
-		if (number > 0.9) {
-			if (health < 3) {
-				board.push({ coords: {x:i, y:j}, showing:false, health:true })
-			} else {
-				board.push({ coords: {x:i, y:j}, showing:false })
-			}
-			health++
-		} else if (number > 0.8){
-			if (weapon < 3) {
-				board.push({ coords: {x:i, y:j}, showing:false, weapon:weapon })
-				weapon++;
-			} else {
-				board.push({ coords: {x:i, y:j}, showing:false })
-			}
-		} else if (number > 0.7) {
-			if (enemy < 5) {
-				board.push({ coords: {x:i, y:j}, showing:false, enemy:enemy })
-				enemy++;
+		if (i > 15) {
+			if (number > 0.99) {
+				if (health < 3) {
+					board.push({ coords: {x:i, y:j}, showing:false, health:true })
+					health++
+				} else {
+					board.push({ coords: {x:i, y:j}, showing:false })
+				}
+			} else if (number > 0.97) {
+				if (enemyNumber < 5) {
+					board.push({ coords: {x:i, y:j}, showing:false, enemyNumber:enemyNumber })
+					enemyNumber++;
+				} else {
+					board.push({ coords: {x:i, y:j}, showing:false })
+				}
+			} else if (number > 0.95){
+				if (weaponNumber < 3) {
+					board.push({ coords: {x:i, y:j}, showing:false, weaponNumber:weaponNumber })
+					weaponNumber++;
+				} else {
+					board.push({ coords: {x:i, y:j}, showing:false })
+				}
 			} else {
 				board.push({ coords: {x:i, y:j}, showing:false })
 			}
@@ -96,5 +101,3 @@ export let weapons = [
 		damage: 10
 	}
 ]
-
-export let health = { life: 25 }

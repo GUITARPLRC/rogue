@@ -26,7 +26,7 @@ class Main extends Component {
 	}
 
 	render() {
-		const { player, enemy, health, weapons } = this.props;
+		const { player, enemy, weapons } = this.props;
 		return (
 			<div className='main'>
 				<h1>The Dungeon of Doom</h1>

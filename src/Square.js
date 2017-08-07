@@ -5,14 +5,14 @@ import './styles/Square.css';
 class Square extends Component {
 
 	render() {
-		let health, weapon, enemy = false;
+		let healthHere, weaponHere, enemyHere = false;
 
 		if (this.props.health) {
-			health = true;
+			healthHere = true;
 		} else if (this.props.weapon) {
-			weapon = true;
+			weaponHere = true;
 		} else if (this.props.enemy) {
-			enemy = true;
+			enemyHere = true;
 		}
 		const { coords, className, player } = this.props;
 
@@ -36,13 +36,13 @@ class Square extends Component {
 		} else if ( coords.x === player.coords.x + 1 && coords.y === player.coords.y + 1) {
 			name = 'square'
 		}
-
+		console.log(this.props.weapon)
 		return (
 			<div className={name} coords={coords}>
 				{name.includes('player') ? <div className='warrior'></div> : null}
-				{health ? <div className='health'></div> : null}
-				{weapon ? <div className='weapon'></div> : null}
-				{enemy ? <div className='enemy'></div> : null}
+				{healthHere ? <div className='health'></div> : null}
+				{weaponHere ? <div className='weapon'></div> : null}
+				{enemyHere ? <div className='enemy'></div> : null}
 			</div>
 		)
 	}
