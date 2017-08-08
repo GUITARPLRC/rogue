@@ -57,7 +57,7 @@ for (let i = 0; i < 40; i++) {
 	for (let j = 0; j < 9; j++) {
 
 		let number = Math.random();
-		if (i > 15) {
+		if (i > 12) {
 			if (number > 0.98) {
 				if (health < 3) {
 					board.push({ coords: {x:i, y:j}, showing:false, health:true })
@@ -65,14 +65,14 @@ for (let i = 0; i < 40; i++) {
 				} else {
 					board.push({ coords: {x:i, y:j}, showing:false })
 				}
-			} else if (number > 0.94) {
+			} else if (number > 0.95) {
 				if (enemyNumber < 5) {
 					board.push({ coords: {x:i, y:j}, showing:false, enemyNumber:enemyNumber })
 					enemyNumber++;
 				} else {
 					board.push({ coords: {x:i, y:j}, showing:false })
 				}
-			} else if (number > 0.85){
+			} else if (number > 0.88){
 				if (weaponNumber < 3) {
 					board.push({ coords: {x:i, y:j}, showing:false, weaponNumber:weaponNumber })
 					weaponNumber++;
