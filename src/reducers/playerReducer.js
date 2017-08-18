@@ -43,7 +43,7 @@ function changePosition(movement, state) {
 	return state;
 }
 
-//TODO fix board edges detect and add battle mode!!
+//TODO make damage random
 
 function checkForObject(board, move, state) {
 
@@ -172,36 +172,58 @@ function checkForObject(board, move, state) {
 		let enemyObj = ''
 		let whichEnemy = ''
 
-		if (board[boardDown].enemyNumber) {
-			enemyObj = enemy[board[boardDown].enemyNumber]
-			whichEnemy = boardDown
-		} else if (board[boardRight].enemyNumber) {
-			enemyObj = enemy[board[boardRight].enemyNumber]
-			whichEnemy = boardRight
-		} else if (board[boardLeft].enemyNumber) {
-			enemyObj = enemy[board[boardLeft].enemyNumber]
-			whichEnemy = boardLeft
-		} else if (board[boardUp].enemyNumber) {
-			enemyObj = enemy[board[boardUp].enemyNumber]
-			whichEnemy = boardUp
+		if (state.coords.x + 1 <= 39 && (board[boardDown].enemyNumber && board[boardDown].enemyNumber !== '')) {
+				enemyObj = enemy[board[boardDown].enemyNumber]
+				whichEnemy = boardDown
+		} else if (state.coords.y + 1 <= 8 && (board[boardRight].enemyNumber && board[boardRight].enemyNumber !== '')) {
+				enemyObj = enemy[board[boardRight].enemyNumber]
+				whichEnemy = boardRight
+		} else if (state.coords.y - 1 >= 0 && (board[boardLeft].enemyNumber && board[boardLeft].enemyNumber !== '')) {
+				enemyObj = enemy[board[boardLeft].enemyNumber]
+				whichEnemy = boardLeft
+		} else if (state.coords.x - 1 >= 0 && (board[boardUp].enemyNumber && board[boardUp].enemyNumber !== '')) {
+				enemyObj = enemy[board[boardUp].enemyNumber]
+				whichEnemy = boardUp
+		} else {
+			return state
 		}
 
-		enemyObj.life = enemyObj.life - state.weapon.damage;
-		state.life = state.life - enemyObj.damage
-		if (enemyObj.life <= 0) {
-			enemyObj.alive = false;
-			board[whichEnemy].enemyNumber = ''
-			state.experience += enemyObj.experience
-			while (state.experience > 20) {
-				state.level += 1
-				state.health += 10
-				state.experience -= 20
+		if (enemyObj !== '' && enemyObj.alive !== false) {
+
+			let playerDamage = Math.floor(Math.random() * state.weapon.damage) + 2
+			let enemyDamage = Math.floor(Math.random() * enemyObj.damage) + 1
+
+			enemyObj.life = enemyObj.life - playerDamage
+			state.life = state.life - enemyDamage
+			if (enemyObj.life <= 0) {
+				enemyObj.alive = false;
+				board[whichEnemy].enemyNumber = ''
+
+				let howManyLeft = 0;
+				for (let i = 0; i < board.length; i++) {
+					if (board[i].enemyNumber && board[i].enemyNumber !== '') {
+						howManyLeft += 1;
+					}
+				}
+				if (howManyLeft === 0) {
+					document.write('Congratulations! You have defeated all the enemies in the dungeon!')
+					setTimeout(() => window.location.reload(), 4000)
+				}
+
+				state.experience += enemyObj.experience
+				while (state.experience > 20) {
+					state.level += 1
+					state.health += 10
+					state.experience -= 20
+					state.weapon.damage += 2
+				}
+			}
+			if (state.life <= 0) {
+				document.write('Sorry, you have died....')
+				setTimeout(() => window.location.reload(), 3500)
 			}
 		}
-		if (state.life <= 0) {
-			document.write('You have died....')
-		}
-		console.log(enemyObj)
+
 	} else {
 		changePosition(move, state)
 	}
