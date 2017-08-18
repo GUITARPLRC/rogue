@@ -46,119 +46,105 @@ function changePosition(movement, state) {
 //TODO check upcoming player position for enemy
 
 function checkForObject(board, move, state) {
-	let playerX = state.coords.x
-	let playerY = state.coords.y
-	if (move === 'down') {
-		playerY = playerY + 1
-		for (let i = 0, length = board.length; i < length; i++) {
-			if (board[i].coords.x === state.coords.x && board[i].coords.y === state.coords.y) {
-				if (board[i].health) {
-					window.scrollBy(0,100)
-					state.life += 25;
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break
-				} else if (board[i].weaponNumber) {
-					window.scrollBy(0,100)
-					if (state.weapon.damage < weapons[board[i].weaponNumber].damage) {
-						state.weapon = weapons[board[i].weaponNumber];
-					}
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break
-				} else if (board[playerY].enemyNumber) {
-					return state
-				} else {
-					changePosition(move, state)
-					window.scrollBy(0,100)
-					return state
-				}
-			}
-		}
-		return state
-	} else if (move === 'right') {
-		playerX = playerX + 1
-		for (let i = 0, length = board.length; i < length; i++) {
-			if (board[i].coords.x === state.coords.x && board[i].coords.y === state.coords.y) {
-				if (board[i].health) {
-					state.life += 25;
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break;
-				} else if (board[i].weaponNumber) {
-					if (state.weapon.damage < weapons[board[i].weaponNumber].damage) {
-						state.weapon = weapons[board[i].weaponNumber];
-					}
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break;
-				} else if (board[playerX].enemyNumber) {
-					return state
-				} else {
-					changePosition(move, state)
-					return state
-				}
-			}
-		}
-		return state;
-	} else if (move === 'up') {
-		playerY = playerY - 1
-		for (let i = 0, length = board.length; i < length; i++) {
-			if (board[i].coords.x === state.coords.x && board[i].coords.y === state.coords.y) {
-				if (board[i].health) {
-					window.scrollBy(0,-100)
-					state.life += 25;
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break
-				} else if (board[i].weaponNumber) {
-					window.scrollBy(0,-100)
-					if (state.weapon.damage < weapons[board[i].weaponNumber].damage) {
-						state.weapon = weapons[board[i].weaponNumber];
-					}
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break
-				} else if (board[i].enemyNumber) {
-					return state
-				} else {
-					changePosition(move, state)
-					window.scrollBy(0,-100)
-					return state
-				}
-			}
-		}
-		return state;
-	} else if (move === 'left') {
-		playerX = playerX - 1
-		for (let i = 0, length = board.length; i < length; i++) {
-			if (board[i].coords.x === state.coords.x && board[i].coords.y === state.coords.y) {
-				if (board[i].health) {
-					state.life += 25;
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break;
-				} else if (board[i].weaponNumber) {
-					window.scrollBy(0,100)
-					if (state.weapon.damage < weapons[board[i].weaponNumber].damage) {
-						state.weapon = weapons[board[i].weaponNumber];
-					}
-					board[i] = { coords: {x: board[i].coords.x, y: board[i].coords.y}, showing: false}
-					changePosition(move, state)
-					break
-				} else if (board[i].enemyNumber) {
-					return state
-				} else {
-					changePosition(move, state)
-					return state
-				}
-			}
-		}
-		return state
-	} else if (move === 'space') {
 
-	} else {
-		return state
+	if (move === 'down') {
+		let playerX = state.coords.x + 1
+		let playerY = state.coords.y
+		let boardNumber = (8 * playerX) + (playerX + playerY)
+
+		if (board[boardNumber].enemyNumber) {
+			return state;
+		} else if (board[boardNumber].health || board[boardNumber].weaponNumber) {
+
+			if (board[boardNumber].health) {
+				state.life += 25
+				board[boardNumber].health = false;
+			} else {
+				if (state.weapon.damage < weapons[board[boardNumber].weaponNumber].damage) {
+					state.weapon = weapons[board[boardNumber].weaponNumber];
+				}
+				board[boardNumber].weaponNumber = false
+			}
+
+			changePosition(move, state)
+		} else {
+			changePosition(move, state)
+		}
+		window.scrollBy(0, 100)
+
+	} else if (move === 'right') {
+		let playerX = state.coords.x
+		let playerY = state.coords.y + 1
+		let boardNumber = (8 * playerX) + (playerX + playerY)
+
+		if (board[boardNumber].enemyNumber) {
+			return state;
+		} else if (board[boardNumber].health || board[boardNumber].weaponNumber) {
+
+			if (board[boardNumber].health) {
+				state.life += 25
+				board[boardNumber].health = false;
+			} else {
+				if (state.weapon.damage < weapons[board[boardNumber].weaponNumber].damage) {
+					state.weapon = weapons[board[boardNumber].weaponNumber];
+				}
+				board[boardNumber].weaponNumber = false
+			}
+
+			changePosition(move, state)
+		} else {
+			changePosition(move, state)
+		}
+
+	} else if (move === 'up') {
+		let playerX = state.coords.x - 1
+		let playerY = state.coords.y
+		let boardNumber = (8 * playerX) + (playerX + playerY)
+
+		if (board[boardNumber].enemyNumber) {
+			return state;
+		} else if (board[boardNumber].health || board[boardNumber].weaponNumber) {
+
+			if (board[boardNumber].health) {
+				state.life += 25
+				board[boardNumber].health = false;
+			} else {
+				if (state.weapon.damage < weapons[board[boardNumber].weaponNumber].damage) {
+					state.weapon = weapons[board[boardNumber].weaponNumber];
+				}
+				board[boardNumber].weaponNumber = false
+			}
+
+			changePosition(move, state)
+		} else {
+			changePosition(move, state)
+		}
+		window.scrollBy(0, -100)
+
+	} else if (move === 'left') {
+		let playerX = state.coords.x
+		let playerY = state.coords.y - 1
+		let boardNumber = (8 * playerX) + (playerX + playerY)
+
+		if (board[boardNumber].enemyNumber) {
+			return state;
+		} else if (board[boardNumber].health || board[boardNumber].weaponNumber) {
+
+			if (board[boardNumber].health) {
+				state.life += 25
+				board[boardNumber].health = false;
+			} else {
+				if (state.weapon.damage < weapons[board[boardNumber].weaponNumber].damage) {
+					state.weapon = weapons[board[boardNumber].weaponNumber];
+				}
+				board[boardNumber].weaponNumber = false
+			}
+
+			changePosition(move, state)
+		} else {
+			changePosition(move, state)
+		}
+
 	}
 
 	return state
