@@ -1,19 +1,7 @@
-export const battle = () => {
-	return {
-		type: 'BATTLE'
-	}
-};
-
-export const move = (value) => {
-	return {
-		type: 'MOVE',
-		value
-	}
-};
-
-export const checkObjects = (board) => {
+export const checkObjects = (board, move) => {
 	return {
 		type: 'CHECK_OBJECTS',
-		board
+		board,
+		move
 	}
 };

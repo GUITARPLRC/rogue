@@ -13,24 +13,26 @@ class Main extends Component {
 	handleKeyPress = (event) => {
 		event.preventDefault();
 		if (event.keyCode === 40) {
-			window.scrollBy(0,100)
-			this.props.move('down')
-			this.props.checkObjects(this.props.board)
+			let move = 'down'
+			this.props.checkObjects(this.props.board, move)
 		} else if (event.keyCode === 39) {
-			this.props.move('right')
-			this.props.checkObjects(this.props.board)
+			let move = 'right'
+			this.props.checkObjects(this.props.board, move)
 		} else if (event.keyCode === 38) {
-			window.scrollBy(0,-100)
-			this.props.move('up')
-			this.props.checkObjects(this.props.board)
+			let move = 'up'
+			this.props.checkObjects(this.props.board, move)
 		} else if (event.keyCode === 37) {
-			this.props.move('left')
-			this.props.checkObjects(this.props.board)
+			let move = 'left'
+			this.props.checkObjects(this.props.board, move)
+		} else if (event.keyCode === 32) {
+			let move = 'space'
+			this.props.checkObjects(this.props.board, move)
 		}
 	};
 
-	componentWillMount() {
+	componentDidMount() {
 		document.addEventListener('keydown', (event) => this.handleKeyPress(event))
+
 	}
 
 	render() {
